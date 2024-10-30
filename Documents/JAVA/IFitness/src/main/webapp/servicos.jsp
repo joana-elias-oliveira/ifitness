@@ -6,147 +6,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ordens de Serviço - iRepair Soluções</title>
+  <title>Clientes - iRepair Soluções</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <style>
-    /* CSS Consistente com a Página de Clientes */
-
-    /* Estilo Global */
-    body {
-      font-family: 'Poppins', sans-serif;
-      color: #333;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 30px 0;
-    }
-
-    h1 {
-      text-align: center;
-      color: #0351ab;
-      font-weight: 600;
-    }
-
-    .btn-add-order {
-      display: inline-block;
-      background-color: #fca311;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 20px;
-      font-size: 1.1rem;
-    }
-
-    .btn-add-order:hover {
-      background-color: #e69310;
-    }
-
-    /* Tabela */
-    .order-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 40px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .order-table th, .order-table td {
-      padding: 12px 20px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .order-table th {
-      background-color: #0351ab;
-      color: white;
-      font-weight: 600;
-    }
-
-    .order-table tr:hover {
-      background-color: #f1f1f1;
-    }
-
-    .action-buttons a {
-      padding: 8px 15px;
-      border-radius: 5px;
-      margin-right: 10px;
-      color: white;
-      text-decoration: none;
-    }
-
-    .btn-edit {
-      background-color: #e69310;
-    }
-
-    .btn-edit:hover {
-      background-color: #a86703;
-    }
-
-    .btn-delete {
-      background-color: #dc3545;
-    }
-
-    .btn-delete:hover {
-      background-color: #8f0c19;
-    }
-
-    /* Modais */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding-top: 50px;
-    }
-
-    .modal-content {
-      background-color: #fff;
-      margin: 5% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 50%;
-      max-width: 700px;
-      border-radius: 10px;
-    }
-
-    .form-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-
-    .form-group label {
-      font-weight: 600;
-      color: #0351ab;
-    }
-
-    .form-group input, .form-group select {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1rem;
-    }
-
-    .submit-btn {
-      background-color: #fca311;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    .submit-btn:hover {
-      background-color: #e69310;
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -273,26 +137,26 @@
     }
 
     /* Tabela de Clientes */
-    .client-table {
+    .service-table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 40px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
-    .client-table th, .client-table td {
+    .service-table th, .service-table td {
       padding: 12px 20px;
       text-align: left;
       border-bottom: 1px solid #ddd;
     }
 
-    .client-table th {
+    .service-table th {
       background-color: #0351ab;
       color: white;
       font-weight: 600;
     }
 
-    .client-table tr:hover {
+    .service-table tr:hover {
       background-color: #f1f1f1;
     }
 
@@ -476,7 +340,6 @@
       background-color: #ccc;
       color: black;
     }
-
   </style>
 </head>
 <body>
@@ -492,14 +355,167 @@
   </ul>
 </nav>
 
+<!-- Cabeçalho da página de Clientes -->
+<header class="header-section">
+  <div class="container">
+    <h1>Servicos</h1>
+    <p>Gerencie suas ordens de servico eficientemente.</p>
+    <a href="#" class="btn-add-client" id="ordemModal">Adicionar Nova ordem de servico</a>
+  </div>
+</header>
 
-<div class="container">
-  <h1>Ordens de Serviço</h1>
-  <p style="text-align:center;">Gerencie suas ordens de serviço de forma eficiente.</p>
-  <a href="#" class="btn-add-order" id="addOrderBtn">Adicionar Nova Ordem</a>
+<!-- Modal para confirmar exclusão de cliente -->
+<div id="deleteClientModal" class="modal-delete">
+  <div class="modal-delete-content">
+    <span class="close-delete">&times;</span>
+    <p>Tem certeza de que deseja excluir este cliente?</p>
+    <button id="confirmDelete" class="btn-confirm">Excluir</button>
+    <button id="cancelDelete" class="btn-cancel">Cancelar</button>
+  </div>
+</div>
 
-  <!-- Tabela de Ordens de Serviço -->
-  <table class="order-table">
+<!-- Modal para Adicionar Ordem de Serviço -->
+<div id="addOrdemServicoModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('addOrdemServicoModal')">&times;</span>
+    <h2>Adicionar Nova Ordem de Serviço</h2>
+    <form action="adicionarOrdemServico" method="POST">
+      <div class="form-container">
+
+        <!-- Descrição -->
+        <div class="form-group">
+          <label for="descricao">Descrição:</label>
+          <input type="text" id="descricao" name="descricao" placeholder="Descrição da ordem de serviço" required>
+        </div>
+
+        <!-- Data de Emissão -->
+        <div class="form-group">
+          <label for="dataEmissao">Data de Emissão:</label>
+          <input type="date" id="dataEmissao" name="dataEmissao" required>
+        </div>
+
+        <!-- Data de Finalização -->
+        <div class="form-group">
+          <label for="dataFinalizacao">Data de Finalização:</label>
+          <input type="date" id="dataFinalizacao" name="dataFinalizacao">
+        </div>
+
+        <!-- Valor -->
+        <div class="form-group">
+          <label for="valor">Valor:</label>
+          <input type="number" id="valor" name="valor" step="0.01" placeholder="0.00" required>
+        </div>
+
+        <!-- Status -->
+        <div class="form-group">
+          <label for="status">Status:</label>
+          <select id="status" name="status" required>
+            <option value="PENDENTE">Pendente</option>
+            <option value="EM_ANDAMENTO">Em Andamento</option>
+            <option value="FINALIZADO">Finalizado</option>
+          </select>
+        </div>
+
+        <!-- Cliente ID -->
+        <div class="form-group">
+          <label for="clienteId">Cliente:</label>
+          <select id="clienteId" name="clienteId" required>
+            <option value="" disabled selected>Selecione um cliente</option>
+            <!-- Aqui é onde a lista de clientes será exibida -->
+            <c:forEach var="cliente" items="${clientes}">
+              <option value="${cliente.id}">${cliente.nome}</option>
+            </c:forEach>
+          </select>
+        </div>
+
+        <!-- Forma de Pagamento -->
+        <div class="form-group">
+          <label for="formaPagamento">Forma de Pagamento:</label>
+          <select id="formaPagamento" name="formaPagamento">
+            <option value="1">Cartão de Crédito</option>
+            <option value="2">Boleto</option>
+            <option value="3">Dinheiro</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Botão de Submissão -->
+      <button type="submit" class="submit-btn">Adicionar Ordem de Serviço</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- Modal para Editar Cliente -->
+<div id="editClientModal" class="modal">
+  <div class="modal-content">
+    <span class="close-edit">&times;</span>
+    <h2>Editar Cliente</h2>
+    <form id="editClientForm" action="editarCliente" method="POST">
+      <input type="hidden" id="edit-id" name="id">
+      <div class="form-container">
+        <div class="form-group">
+          <label for="edit-nome">Nome:</label>
+          <input type="text" id="edit-nome" name="nome" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-email">Email:</label>
+          <input type="email" id="edit-email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-telefone">Telefone:</label>
+          <input type="text" id="edit-telefone" name="telefone" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-cpf">CPF:</label>
+          <input type="text" id="edit-cpf" name="cpf" readonly>
+        </div>
+        <div class="form-group">
+          <label for="edit-logradouro">Logradouro:</label>
+          <input type="text" id="edit-logradouro" name="logradouro">
+        </div>
+        <div class="form-group">
+          <label for="edit-numero">Número:</label>
+          <input type="text" id="edit-numero" name="numero">
+        </div>
+        <div class="form-group">
+          <label for="edit-complemento">Complemento:</label>
+          <input type="text" id="edit-complemento" name="complemento">
+        </div>
+        <div class="form-group">
+          <label for="edit-bairro">Bairro:</label>
+          <input type="text" id="edit-bairro" name="bairro">
+        </div>
+        <div class="form-group">
+          <label for="edit-cep">CEP:</label>
+          <input type="text" id="edit-cep" name="cep">
+        </div>
+        <div class="form-group">
+          <label for="edit-cidade">Cidade:</label>
+          <input type="text" id="edit-cidade" name="cidade">
+        </div>
+        <div class="form-group">
+          <label for="edit-estado">Estado:</label>
+          <select id="edit-estado" name="estado" required>
+            <option value="SP">São Paulo</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="BA">Bahia</option>
+            <!-- Adicione outras opções de estados -->
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="submit-btn">Salvar Alterações</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- Lista de Ordens de Serviço -->
+<section class="container" data-aos="fade-up">
+  <br>
+  <h2>Lista de Ordens de Serviço</h2>
+  <table class="service-table">
     <thead>
     <tr>
       <th>ID</th>
@@ -512,82 +528,184 @@
     </tr>
     </thead>
     <tbody>
-    <!-- Exemplo de ordem -->
-    <tr>
-      <td>1</td>
-      <td>Reparo de tela</td>
-      <td>01/10/2024</td>
-      <td>05/10/2024</td>
-      <td>R$ 250,00</td>
-      <td>Pendente</td>
-      <td class="action-buttons">
-        <a href="#" class="btn-edit">Editar</a>
-        <a href="#" class="btn-delete">Excluir</a>
-      </td>
-    </tr>
-    <!-- Repita para cada ordem -->
+    <c:forEach var="ordemServico" items="${ordensServico}">
+      <tr>
+        <td>${ordemServico.id}</td>
+        <td>${ordemServico.descricao}</td>
+        <td>${ordemServico.dataEmissao}</td>
+        <td>${ordemServico.dataFinalizacao}</td>
+        <td>${ordemServico.valor}</td>
+        <td>${ordemServico.status}</td>
+        <td class="action-buttons">
+          <a href="#" class="btn-edit" onclick="openEditModal({
+                  id: '${ordemServico.id}',
+                  descricao: '${ordemServico.descricao}',
+                  dataEmissao: '${ordemServico.dataEmissao}',
+                  dataFinalizacao: '${ordemServico.dataFinalizacao}',
+                  valor: '${ordemServico.valor}',
+                  status: '${ordemServico.status}'
+                  })">Editar</a>
+
+          <a href="#" class="btn-delete" onclick="confirmDelete(${ordemServico.id})">Excluir</a>
+        </td>
+      </tr>
+    </c:forEach>
     </tbody>
   </table>
-</div>
+</section>
 
-<!-- Modal de Adicionar Ordem -->
-<div id="addOrderModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Adicionar Nova Ordem de Serviço</h2>
-    <form>
-      <div class="form-container">
-        <div class="form-group">
-          <label for="descricao">Descrição:</label>
-          <input type="text" id="descricao" name="descricao">
-        </div>
-        <div class="form-group">
-          <label for="dataEmissao">Data de Emissão:</label>
-          <input type="date" id="dataEmissao" name="dataEmissao">
-        </div>
-        <div class="form-group">
-          <label for="dataFinalizacao">Data de Finalização:</label>
-          <input type="date" id="dataFinalizacao" name="dataFinalizacao">
-        </div>
-        <div class="form-group">
-          <label for="valor">Valor:</label>
-          <input type="text" id="valor" name="valor">
-        </div>
-        <div class="form-group">
-          <label for="status">Status:</label>
-          <select id="status" name="status">
-            <option value="pendente">Pendente</option>
-            <option value="concluida">Concluída</option>
-          </select>
-        </div>
-      </div>
-      <button type="submit" class="submit-btn">Adicionar Ordem</button>
-    </form>
-  </div>
-</div>
 
-<!-- JavaScript para abrir e fechar os modais -->
+<footer>
+  <p>&copy; 2024 iRepair Soluções. Todos os direitos reservados.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
-  var addOrderModal = document.getElementById("addOrderModal");
-  var addOrderBtn = document.getElementById("addOrderBtn");
-  var closeBtns = document.getElementsByClassName("close");
-
-  addOrderBtn.onclick = function() {
-    addOrderModal.style.display = "block";
-  }
-
-  Array.from(closeBtns).forEach(btn => {
-    btn.onclick = function() {
-      addOrderModal.style.display = "none";
-    }
+  AOS.init({
+    duration: 1000,
+    once: true,
   });
 
+  //modal excluir
+  var deleteModal = document.getElementById("deleteClientModal");
+  var closeDelete = document.getElementsByClassName("close-delete")[0];
+  var confirmDeleteButton = document.getElementById("confirmDelete");
+  var cancelDeleteButton = document.getElementById("cancelDelete");
+  var clientIdToDelete = null;
+
+  // Função para abrir o modal de exclusão e definir o ID do cliente
+  function confirmDelete(clientId) {
+    clientIdToDelete = clientId;
+    console.log("ID do cliente para exclusão (capturado no JavaScript):", clientIdToDelete);
+    deleteModal.style.display = "block";
+  }
+
+  // Fechar o modal de exclusão ao clicar em "Cancelar" ou no "X"
+  closeDelete.onclick = function() {
+    deleteModal.style.display = "none";
+    clientIdToDelete = null;
+  };
+
+  cancelDeleteButton.onclick = function() {
+    deleteModal.style.display = "none";
+    clientIdToDelete = null;
+  };
+
+  // Enviar a solicitação de exclusão ao confirmar
+  confirmDeleteButton.onclick = function(clientId) {
+    clientIdToDelete = clientId;
+    if (clientIdToDelete) {
+      const url = `excluirCliente?id=${clientIdToDelete}`;
+      console.log("URL de exclusão (construída no JavaScript):", url);
+      window.location.href = url;
+    } else {
+      console.error("ID do cliente não definido para exclusão.");
+    }
+  };
+
+
+  // Modal para Adicionar Ordem de Serviço
+  var ordemModal = document.getElementById("addOrdemServicoModal");
+  var ordemBtn = document.getElementById("ordemModal"); // Certifique-se de que o ID seja "ordemModal"
+  var ordemClose = ordemModal.getElementsByClassName("close")[0]; // Captura o botão de fechar dentro do modal
+
+  ordemBtn.onclick = function() {
+    ordemModal.style.display = "block";
+  }
+
+  ordemClose.onclick = function() {
+    ordemModal.style.display = "none";
+  }
+
+  // Fecha o modal ao clicar fora do conteúdo
   window.onclick = function(event) {
-    if (event.target == addOrderModal) {
-      addOrderModal.style.display = "none";
+    if (event.target == ordemModal) {
+      ordemModal.style.display = "none";
     }
   }
-</script>
 
+
+
+  //modal editar
+  var editModal = document.getElementById("editClientModal");
+  var closeEdit = document.getElementsByClassName("close-edit")[0];
+
+  // Função para abrir o modal de edição e preencher os dados
+  function openEditModal(cliente) {
+    document.getElementById("edit-id").value = cliente.id;
+    document.getElementById("edit-nome").value = cliente.nome;
+    document.getElementById("edit-email").value = cliente.email;
+    document.getElementById("edit-telefone").value = cliente.telefone;
+    document.getElementById("edit-cpf").value = cliente.cpf;
+    document.getElementById("edit-logradouro").value = cliente.logradouro;
+    document.getElementById("edit-numero").value = cliente.numero;
+    document.getElementById("edit-complemento").value = cliente.complemento;
+    document.getElementById("edit-bairro").value = cliente.bairro;
+    document.getElementById("edit-cep").value = cliente.cep;
+    document.getElementById("edit-cidade").value = cliente.cidade;
+    document.getElementById("edit-estado").value = cliente.estado;
+    editModal.style.display = "block";
+  }
+
+  // Fechar o modal de edição
+  closeEdit.onclick = function() {
+    editModal.style.display = "none";
+  };
+
+  // Fechar o modal de edição ao clicar fora
+  window.onclick = function(event) {
+    if (event.target == editModal) {
+      editModal.style.display = "none";
+    }
+  };
+
+
+  function buscarCEP() {
+    const cepInput = document.getElementById("cep"); // Captura o elemento diretamente
+
+    if (!cepInput) {
+      alert("Campo de CEP não encontrado!");
+      return;
+    }
+
+    const cep = cepInput.value.trim().replace(/\D/g, ''); // Remove espaços e caracteres não numéricos
+    console.log("CEP capturado:", cep);
+
+    if (cep.length === 8) {
+      const url = `https://cors-anywhere.herokuapp.com/https://viacep.com.br/ws/${cep}/json/`;
+      console.log("URL de requisição:", url); // Confirme que a URL está correta
+
+      fetch(url)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Erro na requisição');
+                }
+                return response.json();
+              })
+              .then(data => {
+                console.log("Dados recebidos do CEP:", data);
+
+                if (!data.erro) {
+                  document.getElementById("logradouro").value = data.logradouro || '';
+                  document.getElementById("bairro").value = data.bairro || '';
+                  document.getElementById("cidade").value = data.localidade || '';
+                  document.getElementById("estado").value = data.uf || '';
+                } else {
+                  alert("CEP não encontrado.");
+                }
+              })
+              .catch(error => {
+                alert("Erro ao buscar o CEP.");
+                console.error("Erro na requisição:", error);
+              });
+    } else {
+      alert("CEP inválido. Certifique-se de que ele tenha 8 dígitos.");
+    }
+  }
+
+
+
+
+</script>
 </body>
 </html>

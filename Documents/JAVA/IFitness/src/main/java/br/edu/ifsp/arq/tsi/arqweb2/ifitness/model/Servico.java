@@ -1,11 +1,10 @@
 package br.edu.ifsp.arq.tsi.arqweb2.ifitness.model;
 
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class OrdemServico {
-    private Long codigo;
+public class Servico {
+    private Long id;
     private String descricao;
     private LocalDate dataEmissao;
     private LocalDate dataFinalizacao;
@@ -16,12 +15,12 @@ public class OrdemServico {
     private FormaPagamento formaPagamento;
 
     // Getters e Setters
-    public Long getCodigo() {
-        return codigo;
+    public Long getId() {
+        return id;
     }
 
-    public void setCodigo(Long codigo) {
-        this.codigo = codigo;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescricao() {

@@ -139,7 +139,7 @@ public class ClienteDao {
             ps.setString(9, cliente.getCep());
             ps.setString(10, cliente.getCidade());
             ps.setString(11, cliente.getEstado());
-            ps.setString(12, cliente.getCpf()); // Alterado para utilizar CPF
+            ps.setString(12, cliente.getCpf());
 
             ps.executeUpdate();
             return true;
@@ -147,7 +147,6 @@ public class ClienteDao {
             throw new RuntimeException("Erro durante a atualização do cliente no BD", e);
         }
     }
-
 
     // Método para excluir cliente por ID
     public boolean deleteById(Long id) {
@@ -164,8 +163,8 @@ public class ClienteDao {
         }
     }
 
-    // Método para listar clientes
-    public List<Cliente> listarClientes() {
+    // Método para listar todos os clientes (renomeado para getAllClientes)
+    public List<Cliente> getAllClientes() {
         List<Cliente> clientes = new ArrayList<>();
         String sql = "SELECT * FROM cliente";
 
@@ -189,16 +188,12 @@ public class ClienteDao {
                 cliente.setCidade(rs.getString("cidade"));
                 cliente.setEstado(rs.getString("estado"));
 
-                // Adiciona o cliente à lista
                 clientes.add(cliente);
-
             }
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao listar clientes", e);
         }
 
         return clientes;
-
-
     }
 }
